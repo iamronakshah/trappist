@@ -20,7 +20,7 @@ namespace Promact.Trappist.Repository.Tests
         public void CreateTest(Test test)
         {
             _dbContext.Test.Add(test);
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }      
         /// <summary>
         /// this method is used to check whether test name is unique or not

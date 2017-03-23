@@ -21,7 +21,6 @@ namespace Promact.Trappist.Repository.Tests
         /// </summary>
         /// <returns>List Of Tests</returns>
         List<Test> GetAllTests();
-
     }
 
 }
