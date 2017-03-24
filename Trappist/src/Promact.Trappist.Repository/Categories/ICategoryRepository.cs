@@ -1,5 +1,7 @@
 ﻿using Promact.Trappist.DomainModel.Models.Category;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Promact.Trappist.Repository.Categories
 {
     public interface ICategoryRepository
@@ -17,7 +19,7 @@ namespace Promact.Trappist.Repository.Categories
         /// </summary>
         /// <param name="key">unique key of a table</param>
         /// <returns>if Id match then it will return object</returns>
-        Category GetCategory(int key);
+        Task<Category> GetCategory(int key);
 
         /// <summary>
         /// Edit category From Category model
@@ -29,6 +31,6 @@ namespace Promact.Trappist.Repository.Categories
         /// delete a Category from Category model
         /// </summary>
         /// <param name="catagoryName">object of category model </param>
-        void RemoveCategoryToDatabase(Category category);
+        Task RemoveCategoryToDatabaseAsync(Category category);
     }
 }

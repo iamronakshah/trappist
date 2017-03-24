@@ -4,6 +4,7 @@ using Xunit;
 using System;
 using System.Linq;
 using Promact.Trappist.Repository.Categories;
+using System.Threading.Tasks;
 
 namespace Promact.Trappist.Test.Category
 {
@@ -32,29 +33,30 @@ namespace Promact.Trappist.Test.Category
         }
 
         [Fact]
-        public void UpdateCategory()
+        public async Task UpdateCategory()
         {
             var category = CreateCategory();
             _categoryRepository.AddCategory(category);
-            var categoryToUpdate = _categoryRepository.GetCategory(category.Id);
+            var categoryToUpdate = await _categoryRepository.GetCategory(category.Id);
             Assert.NotNull(categoryToUpdate);
             if (categoryToUpdate != null)
                 categoryToUpdate.CategoryName = "Updated Category";
             _categoryRepository.CategoryEdit(categoryToUpdate);
-            Assert.True(_trappistDbContext.Category.Count(x=>x.CategoryName == "Updated Category") == 1);
+            Assert.True(_trappistDbContext.Category.Count(x => x.CategoryName == "Updated Category") == 1);
         }
 
         /// <summary>
         /// This is unit testing method. aim of this method is check a category remove from database or not
         /// </summary>
         [Fact]
-        public void DeleteCategory()
+        public async Task DeleteCategory()
         {
             var category = CreateCategory();
-            var deleteCategory = _categoryRepository.GetCategory(category.Id);
+            _categoryRepository.AddCategory(category);
+            var deleteCategory = await _categoryRepository.GetCategory(category.Id);
             if (deleteCategory != null)
             {
-                _categoryRepository.RemoveCategoryToDatabase(deleteCategory);
+                await _categoryRepository.RemoveCategoryToDatabaseAsync(deleteCategory);
                 Assert.Equal(0, _trappistDbContext.Category.Count());
             }
         }

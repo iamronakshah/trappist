@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Promact.Trappist.DomainModel.Models.Category;
 using Promact.Trappist.Repository.Categories;
+using System.Threading.Tasks;
 
 namespace Promact.Trappist.Core.Controllers
 {
@@ -51,13 +52,13 @@ namespace Promact.Trappist.Core.Controllers
         /// <param name="catagory">Object of  class Category</param>
         /// <returns>object of the class if key found or else it will return Bad request</returns>
         [HttpPut("{id}")]
-        public IActionResult CategoryEdit(int Id, [FromBody] Category category)
+        public async Task<IActionResult> CategoryEdit(int Id, [FromBody] Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var previousCategory = _categoryRepository.GetCategory(Id);
+            var previousCategory = await _categoryRepository.GetCategory(Id);
             if (previousCategory == null)
             {
                 return NotFound();
@@ -74,16 +75,16 @@ namespace Promact.Trappist.Core.Controllers
         ///</summary>
         /// <param name="categoryId">Id of category</param>
         [HttpDelete("{categoryId}")]
-        public IActionResult CategoryRemove([FromRoute] int categoryId)
+        public async Task<IActionResult> CategoryRemove([FromRoute] int categoryId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var categoryData = _categoryRepository.GetCategory(categoryId);
+            var categoryData = await _categoryRepository.GetCategory(categoryId);
             if (categoryData != null)
             {
-                _categoryRepository.RemoveCategoryToDatabase(categoryData);
+                await _categoryRepository.RemoveCategoryToDatabaseAsync(categoryData);
                 return Ok(categoryId);
             }
             else
