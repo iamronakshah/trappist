@@ -9,6 +9,7 @@ namespace Promact.Trappist.Repository.Categories
 {
     public class CategoryRepository : ICategoryRepository
     {
+
         private readonly TrappistDbContext _dbContext;
 
         public CategoryRepository(TrappistDbContext dbContext)
@@ -20,6 +21,7 @@ namespace Promact.Trappist.Repository.Categories
         /// Get all the names of Categories
         /// </summary>
         /// <returns>Categories list</returns>
+        
         public IEnumerable<Category> GetAllCategories()
         {
             var category = _dbContext.Category.ToList();
@@ -45,6 +47,7 @@ namespace Promact.Trappist.Repository.Categories
         /// </summary>
         /// <param name="Key"></param>
         /// <Returns>if key foundthen Return respective category from category table or will return Null</Returns>
+        
         public async Task<Category> GetCategory(int key)
         {
             var category = await _dbContext.Category.FirstAsync(Check => Check.Id == key);
@@ -57,6 +60,7 @@ namespace Promact.Trappist.Repository.Categories
         // Edit a Category from Category Table
         // </summary>
         // <param name="catagory">object of the class Category</param>
+
         public void CategoryEdit(Category category)
         {
             _dbContext.Category.Update(category);
@@ -68,7 +72,8 @@ namespace Promact.Trappist.Repository.Categories
         /// Delete a Category from Category model
         /// </summary>
         /// <param name="category"> object of category model</param>
-        public async Task RemoveCategoryToDatabaseAsync(Category category)
+        
+        public async Task RemoveCategoryAsync(Category category)
         {
             _dbContext.Category.Remove(category);
             await _dbContext.SaveChangesAsync();
