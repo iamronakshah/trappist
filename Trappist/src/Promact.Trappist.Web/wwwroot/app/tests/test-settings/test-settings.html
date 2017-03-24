@@ -90,14 +90,14 @@
   <div class="footer-block clearfix">
     <div class="container">
       <ul class="steps pull-left">
-        <li class="h5">Select Sections</li>
+        <li class="h5"><a [routerLink]="['/tests/sections']">Select Sections</a></li>
         <li class="h5"><i class="material-icons">keyboard_arrow_right</i></li>
-        <li class="h5">Select Questions</li>
+        <li class="h5"><a [routerLink]="['/tests/questions']">Select Questions</a></li>
         <li class="h5"><i class="material-icons">keyboard_arrow_right</i></li>
-        <li class="h5 active">Settings & Schedule</li>
+        <li class="h5 active"><a [routerLink]="['/tests/settings']">Settings & Schedule</a></li>
       </ul>
       <div class="buttons-block pull-right">
-        <button type="button" class="btn">Save & Exit</button>
+        <button type="button" class="btn" [routerLink]="['/tests']">Save & Exit</button>
         <button type="button" class="btn btn-primary" (click)="launchTestDialog(testsettings.id,testsettings)">Save & Share</button>
       </div>
     </div>

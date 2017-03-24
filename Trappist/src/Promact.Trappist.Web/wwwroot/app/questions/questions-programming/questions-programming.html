@@ -61,8 +61,8 @@
           <label class="h4">Test Case(s)</label>
           <br />
           <button type="button" class="btn btn-primary" [hidden]="showTestCase" (click)="showTestCase=true">Add Test Case</button>
-          <div class="test-case-block" [hidden]="!showTestCase">
-            <div class="tc-header clearfix">
+          <div class="collapsible-block" [hidden]="!showTestCase">
+            <div class="collapsible-header clearfix">
               <div class="title-info h2 pull-left">
                 <span>Type: Basic</span>
                 <span> | </span>
@@ -71,11 +71,11 @@
                 <span>Weightage: 0</span>
               </div>
               <div class="pull-right">
-                <span class="delete-option h7"><i class="material-icons">delete</i> <span class="h7">Delete</span></span>
+                <span class="delete-option h7"><i class="material-icons">delete</i> <span>Delete</span></span>
                 <span class="collapsible-icon" (click)="collapseTestCase=!collapseTestCase"><i class="material-icons">remove</i></span>
               </div>
             </div>
-            <div class="tc-body" [hidden]="collapseTestCase">
+            <div class="collapsible-body" [hidden]="collapseTestCase">
               <div class="form-group">
                 <label>Test Case Title</label>
                 <input type="text" class="form-control half-width" />
@@ -113,8 +113,8 @@
               </div>
             </div>
           </div>
-          <div class="test-case-block" [hidden]="!showNewTestCase">
-            <div class="tc-header clearfix">
+          <div class="collapsible-block" [hidden]="!showNewTestCase">
+            <div class="collapsible-header clearfix">
               <div class="title-info h2 pull-left">
                 <span>Type: Basic</span>
                 <span> | </span>
@@ -123,11 +123,11 @@
                 <span>Weightage: 0</span>
               </div>
               <div class="pull-right">
-                <span class="delete-option h7"><i class="material-icons">delete</i> <span class="h7">Delete</span></span>
+                <span class="delete-option h7"><i class="material-icons">delete</i> <span>Delete</span></span>
                 <span class="collapsible-icon" (click)="collapseNewTestCase=!collapseNewTestCase"><i class="material-icons">remove</i></span>
               </div>
             </div>
-            <div class="tc-body" [hidden]="collapseNewTestCase">
+            <div class="collapsible-body" [hidden]="collapseNewTestCase">
               <div class="form-group">
                 <label>Test Case Title</label>
                 <input type="text" class="form-control half-width" />

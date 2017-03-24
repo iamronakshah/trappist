@@ -79,11 +79,11 @@
   <div class="footer-block clearfix">
     <div class="container">
       <ul class="steps pull-left">
-        <li class="h5 active">Select Sections</li>
+        <li class="h5 active"><a [routerLink]="['/tests/sections']">Select Sections</a></li>
         <li class="h5"><i class="material-icons">keyboard_arrow_right</i></li>
-        <li class="h5">Select Questions</li>
+        <li class="h5"><a [routerLink]="['/tests/questions']">Select Questions</a></li>
         <li class="h5"><i class="material-icons">keyboard_arrow_right</i></li>
-        <li class="h5">Settings & Schedule</li>
+        <li class="h5"><a [routerLink]="['/tests/settings']">Settings & Schedule</a></li>
       </ul>
       <div class="buttons-block pull-right">
         <button type="button" class="btn" [routerLink]="['/tests']">Save & Exit</button>
