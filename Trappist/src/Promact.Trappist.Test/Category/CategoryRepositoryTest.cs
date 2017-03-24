@@ -72,5 +72,6 @@ namespace Promact.Trappist.Test.Category
             };
             return category;
         }
+
     }
 }

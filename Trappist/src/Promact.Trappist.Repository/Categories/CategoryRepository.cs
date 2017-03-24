@@ -78,5 +78,6 @@ namespace Promact.Trappist.Repository.Categories
             _dbContext.Category.Remove(category);
             await _dbContext.SaveChangesAsync();
         }
+
     }
 }
