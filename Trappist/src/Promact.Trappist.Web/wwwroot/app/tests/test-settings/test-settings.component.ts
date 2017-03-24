@@ -25,6 +25,8 @@ export class TestSettingsComponent {
     warningMessage: string;
     endDate: string;
     ipAddressPattern: string;
+   
+    
 
 
     /**
