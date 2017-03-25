@@ -23,7 +23,8 @@ using AutoMapper;
 using Promact.Trappist.DomainModel.ApplicationClasses.Question;
 using Promact.Trappist.DomainModel.Models.Question;
 using Promact.Trappist.DomainModel.ApplicationClasses.SingleMultipleAnswerQuestionApplicationClass;
-
+using Promact.Trappist.DomainModel.Models.Test;
+using Promact.Trappist.DomainModel.ApplicationClasses.TestSettings;
 
 namespace Promact.Trappist.Web
 {
@@ -129,6 +130,7 @@ namespace Promact.Trappist.Web
                 cfg.CreateMap<SingleMultipleAnswerQuestion, SingleMultipleAnswerQuestionApplicationClass>();
                 cfg.CreateMap<CodeSnippetQuestion, SingleMultipleAnswerQuestionApplicationClass>();
                 cfg.CreateMap<CodeSnippetQuestionDto, CodeSnippetQuestion>();
+                cfg.CreateMap<TestSettingsAC, Test>();
             });
             #endregion
         }
