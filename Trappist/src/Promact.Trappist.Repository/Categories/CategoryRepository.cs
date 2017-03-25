@@ -48,7 +48,7 @@ namespace Promact.Trappist.Repository.Categories
         /// <param name="Key"></param>
         /// <Returns>if key foundthen Return respective category from category table or will return Null</Returns>
         
-        public async Task<Category> GetCategory(int key)
+        public async Task<Category> GetCategoryAsync(int key)
         {
             var category = await _dbContext.Category.FirstAsync(Check => Check.Id == key);
             return category;

@@ -21,7 +21,7 @@ namespace Promact.Trappist.Repository.Categories
         /// <param name="key">unique key of a table</param>
         /// <returns>if Id match then it will return object</returns>
         
-        Task<Category> GetCategory(int key);
+        Task<Category> GetCategoryAsync(int key);
 
         /// <summary>
         /// Edit category From Category model

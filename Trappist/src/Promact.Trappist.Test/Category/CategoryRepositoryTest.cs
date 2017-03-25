@@ -38,7 +38,7 @@ namespace Promact.Trappist.Test.Category
         {
             var category = CreateCategory();
             _categoryRepository.AddCategory(category);
-            var categoryToUpdate = await _categoryRepository.GetCategory(category.Id);
+            var categoryToUpdate = await _categoryRepository.GetCategoryAsync(category.Id);
             Assert.NotNull(categoryToUpdate);
             if (categoryToUpdate != null)
                 categoryToUpdate.CategoryName = "Updated Category";
@@ -55,7 +55,7 @@ namespace Promact.Trappist.Test.Category
         {
             var category = CreateCategory();
             _categoryRepository.AddCategory(category);
-            var deleteCategory = await _categoryRepository.GetCategory(category.Id);
+            var deleteCategory = await _categoryRepository.GetCategoryAsync(category.Id);
             if (deleteCategory != null)
             {
                 await _categoryRepository.RemoveCategoryAsync(deleteCategory);
