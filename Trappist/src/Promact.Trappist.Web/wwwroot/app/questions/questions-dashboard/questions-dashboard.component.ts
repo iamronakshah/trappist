@@ -1,14 +1,14 @@
-﻿import { Component, OnInit, ViewChild } from "@angular/core";
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { AddCategoryDialogComponent } from "./add-category-dialog.component";
-import { DeleteCategoryDialogComponent } from "./delete-category-dialog.component";
-import { DeleteQuestionDialogComponent } from "./delete-question-dialog.component";
-import { QuestionsService } from "../questions.service";
-import { CategoryService } from "../category.service";
-import { Question } from "../../questions/question.model"
-import { DifficultyLevel } from "../../questions/enum-difficultylevel"
-import { QuestionType } from "../../questions/enum-questiontype"
-import { Category } from "../../questions/category.model"
+import { AddCategoryDialogComponent } from './add-category-dialog.component';
+import { DeleteCategoryDialogComponent } from './delete-category-dialog.component';
+import { DeleteQuestionDialogComponent } from './delete-question-dialog.component';
+import { QuestionsService } from '../questions.service';
+import { CategoryService } from '../category.service';
+import { Question } from '../../questions/question.model';
+import { DifficultyLevel } from '../../questions/enum-difficultylevel';
+import { QuestionType } from '../../questions/enum-questiontype';
+import { Category } from '../../questions/category.model';
 
 @Component({
     moduleId: module.id,
@@ -17,6 +17,7 @@ import { Category } from "../../questions/category.model"
 })
 
 export class QuestionsDashboardComponent {
+
     questionDisplay: Question[] = new Array<Question>();
     categoryArray: Category[] = new Array<Category>();
     //To enable enum difficultylevel in template
@@ -65,4 +66,5 @@ export class QuestionsDashboardComponent {
     deleteQuestionDialog() {
         this.dialog.open(DeleteQuestionDialogComponent);
     }
+
 }
