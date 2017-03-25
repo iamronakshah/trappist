@@ -2,7 +2,7 @@
 using Promact.Trappist.DomainModel.ApplicationClasses;
 using Promact.Trappist.DomainModel.ApplicationClasses.Question;
 using Promact.Trappist.Repository.Questions;
-
+using System.Threading.Tasks;
 
 namespace Promact.Trappist.Core.Controllers
 {
@@ -53,6 +53,19 @@ namespace Promact.Trappist.Core.Controllers
         {
             var questionsList = _questionsRepository.GetAllQuestions();
             return Ok(questionsList);
+        }
+
+        /// <summary>
+        /// Returns all the coding languages
+        /// </summary>
+        /// <returns>
+        /// coding language of CodingLanguageAC type
+        /// </returns>
+        [HttpGet("codinglanguage")]
+        public async Task<IActionResult> GetAllCodingLanguage()
+        {
+            var codinglanguages = await _questionsRepository.GetAllCodingLanguageAsync();
+            return Ok(codinglanguages);
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Promact.Trappist.DomainModel.DbContext;
-using Promact.Trappist.DomainModel.ApplicationClasses.Question;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Promact.Trappist.DomainModel.Models.Question;
+using Microsoft.EntityFrameworkCore;
+using Promact.Trappist.DomainModel.ApplicationClasses.Question;
 using Promact.Trappist.DomainModel.ApplicationClasses.SingleMultipleAnswerQuestionApplicationClass;
+using Promact.Trappist.DomainModel.DbContext;
+using Promact.Trappist.DomainModel.Models.Question;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Promact.Trappist.Repository.Questions
 {
@@ -67,6 +69,26 @@ namespace Promact.Trappist.Repository.Questions
                 _dbContext.SaveChanges();
                 transaction.Commit();
             }
+        }
+
+        /// <summary>
+        /// Gets all the coding languages int the database
+        /// </summary>
+        /// <returns>coding language in CodingLanguageAC</returns>
+        public async Task<ICollection<CodingLanguageAC>> GetAllCodingLanguageAsync()
+        {
+            var codingLanguage = await _dbContext.CodingLanguage.ToListAsync();
+
+            ICollection<CodingLanguageAC> codingLanguageAC = new List<CodingLanguageAC>();
+            codingLanguage.ForEach(x =>
+            {
+                codingLanguageAC.Add(new CodingLanguageAC
+                {
+                    LanguageCode = x.Language,
+                    LanguageName = (x.Language).ToString()
+                });
+            });
+            return codingLanguageAC;
         }
     }
 }

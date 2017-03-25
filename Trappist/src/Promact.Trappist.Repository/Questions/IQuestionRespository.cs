@@ -2,6 +2,8 @@
 using Promact.Trappist.DomainModel.ApplicationClasses.SingleMultipleAnswerQuestionApplicationClass;
 using Promact.Trappist.DomainModel.Models.Question;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Promact.Trappist.Repository.Questions
 {
     public interface IQuestionRespository
@@ -22,5 +24,11 @@ namespace Promact.Trappist.Repository.Questions
         /// </summary>
         /// <returns>Question list</returns>
         ICollection<SingleMultipleAnswerQuestionApplicationClass> GetAllQuestions();
+
+        /// <summary>
+        /// Gets all the coding languages from database
+        /// </summary>
+        /// <returns></returns>
+        Task<ICollection<CodingLanguageAC>> GetAllCodingLanguageAsync();
     }
 }

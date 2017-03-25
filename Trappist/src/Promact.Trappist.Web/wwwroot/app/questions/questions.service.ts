@@ -2,12 +2,23 @@
 import { HttpService } from "../core/http.service";
 @Injectable()
 export class QuestionsService {
-    private questionsApiUrl = "api/question";
-    constructor(private httpService: HttpService) {}
+    private questionsApiUrl = "api";
+    constructor(private httpService: HttpService) { }
     /**
      * get list of questions
      */
     getQuestions() {
         return this.httpService.get(this.questionsApiUrl);
+    }
+
+    /**
+     * gets list of coding languages
+     */
+    getCodingLanguage() {
+        return this.httpService.get(this.questionsApiUrl + "/codinglanguage");
+    }
+
+    postCodingQuestion() {
+
     }
 }
