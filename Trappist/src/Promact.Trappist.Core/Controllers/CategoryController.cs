@@ -81,7 +81,7 @@ namespace Promact.Trappist.Core.Controllers
         /// <param name="categoryId">Id of category</param>
         
         [HttpDelete("{categoryId}")]
-        public async Task<IActionResult> CategoryRemoveAsync([FromRoute] int categoryId)
+        public async Task<IActionResult> DeleteCategoryAsync([FromRoute] int categoryId)
         {
             if (!ModelState.IsValid)
             {

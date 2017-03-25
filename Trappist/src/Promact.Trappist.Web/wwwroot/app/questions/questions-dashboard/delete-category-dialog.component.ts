@@ -20,7 +20,7 @@ export class DeleteCategoryDialogComponent {
     // call removeCategory() method of categoryService class 
     removeCategoryData(deleteCategory: number) {
         this.categoryService.removeCategory(deleteCategory).subscribe((response: any) => {
-            if (response.status >= 200 && response.status <= 299) {
+            if (response.status === 200) {
                 for (let i = 0; i < this.categoryArray.length; i++) {
                     if (deleteCategory === this.categoryArray[i].id) {
                         this.categoryArray.splice(this.categoryArray.indexOf(this.categoryArray[i]), 1);
