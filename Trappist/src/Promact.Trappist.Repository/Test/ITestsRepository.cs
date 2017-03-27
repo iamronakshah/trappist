@@ -10,7 +10,7 @@ namespace Promact.Trappist.Repository.Tests
         /// this method is used to create a new test
         /// </summary>
         /// <param name="test">object of Test</param>
-        Task<int> CreateTest(Test test);
+        void CreateTest(Test test);
         /// <summary>
         /// this method is used to verify Name of the test is unique or not
         /// </summary>
