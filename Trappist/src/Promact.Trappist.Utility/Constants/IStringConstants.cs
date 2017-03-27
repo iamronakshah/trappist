@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Promact.Trappist.Utility.Constants
+﻿namespace Promact.Trappist.Utility.Constants
 {
     public interface IStringConstants
     {
@@ -10,15 +8,17 @@ namespace Promact.Trappist.Utility.Constants
         /// property Success is called when test creation is successfuly done
         string Success { get; }
 
+        string CharactersForLink { get; }
+
         #region "Account Constants"
         /// <summary>
         /// property InavalidLoginError is used when input credentials are not matched with database at the time of login
         /// </summary>
-        string InavalidLoginError { get;  }
+        string InavalidLoginError { get; }
         /// <summary>
         /// property InavalidLoginError is used when model state and model binding are not proper
         /// </summary>
-        string InavalidModelError { get;  }
+        string InavalidModelError { get; }
         #endregion
     }
 }

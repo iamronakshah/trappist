@@ -4,13 +4,13 @@ namespace Promact.Trappist.Utility.Constants
 {
     public class StringConstants : IStringConstants
     {
-     
+
 
         public string InvalidTestName
         {
             get
             {
-                return "Invalid Test Name "; 
+                return "Invalid Test Name ";
             }
         }
 
@@ -18,7 +18,15 @@ namespace Promact.Trappist.Utility.Constants
         {
             get
             {
-                return "Test Created successfuly"; 
+                return "Test Created successfuly";
+            }
+        }
+
+        public string CharactersForLink
+        {
+            get
+            {
+                return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             }
         }
 
@@ -39,6 +47,8 @@ namespace Promact.Trappist.Utility.Constants
                 return "Invalid Login Attempt!";
             }
         }
+
+
         #endregion
     }
 }

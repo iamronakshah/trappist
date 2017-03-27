@@ -2,6 +2,7 @@
 using Promact.Trappist.DomainModel.Models.Test;
 using Promact.Trappist.Repository.Tests;
 using Promact.Trappist.Utility.Constants;
+using System.Threading.Tasks;
 
 namespace Promact.Trappist.Core.Controllers
 {
@@ -11,29 +12,49 @@ namespace Promact.Trappist.Core.Controllers
     {
         private readonly ITestsRepository _testRepository;
         private readonly IStringConstants _stringConstant;
-  
+
         public TestsController(ITestsRepository testRepository, IStringConstants stringConstant)
         {
             _testRepository = testRepository;
-          _stringConstant = stringConstant;
-        }    
+            _stringConstant = stringConstant;
+        }
         /// <summary>
-        /// this method is used to add a new test 
+        /// this method is to verify unique name of a test
         /// </summary>
-        /// <param name="test">object of the Test</param>
-        /// <returns>string</returns>
-        [HttpPost]
-        public string CreateTest([FromBody] Test test)
+        /// <param name="testName">name of the test</param>
+        /// <returns>boolean</returns>
+        [HttpGet("{testName}")]
+        public async Task<Response> IsUniqueTestName([FromRoute] string testName)
         {
-            if (_testRepository.UniqueTestName(test)) // verifying the test name is unique or not
+            Response response = new Response();
+            // verifying the test name is unique or not
+            response = await _testRepository.IsTestNameUnique(testName);
+            if (response.ResponseValue)
             {
-                _testRepository.CreateTest(test);
-                return _stringConstant.Success;              
+                return (response);
             }
             else
             {
-                return _stringConstant.InvalidTestName;
-            }           
+                response.ResponseValue = false;
+                return (response);
+            }
+        }
+        /// <summary>
+        /// this method is used to add a new test 
+        /// </summary>
+        /// <param name="test">object of the Test</param>   
+        /// <returns>created test</returns>
+        [HttpPost]
+        public async Task<IActionResult> CreateTest([FromBody] Test test)
+        {
+            if (ModelState.IsValid)
+            {
+                _testRepository.RandomLinkString(test, 10);
+                var response = await _testRepository.CreateTest(test);
+                return Ok(test);
+            }
+            else
+                return BadRequest();
         }
         /// <summary>
         /// Get All Tests
@@ -45,6 +66,5 @@ namespace Promact.Trappist.Core.Controllers
             var tests = _testRepository.GetAllTests();
             return Ok(tests);
         }
-
     }
 }
