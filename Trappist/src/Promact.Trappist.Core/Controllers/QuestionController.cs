@@ -3,7 +3,6 @@ using Promact.Trappist.DomainModel.ApplicationClasses;
 using Promact.Trappist.DomainModel.ApplicationClasses.Question;
 using Promact.Trappist.Repository.Questions;
 using System.Threading.Tasks;
-
 namespace Promact.Trappist.Core.Controllers
 {
     [Route("api")]
@@ -15,13 +14,13 @@ namespace Promact.Trappist.Core.Controllers
             _questionsRepository = questionsRepository;
         }
 
+        #region Question API
         /// <summary>
         /// Add single multiple answer question into model
         /// </summary>
         /// <param name="singleMultipleQuestion"></param>
         /// <returns></returns>   
-        [Route("singlemultiplequestion")]
-        [HttpPost]
+        [HttpPost("singlemultiplequestion")]
         public IActionResult AddSingleMultipleAnswerQuestion([FromBody]SingleMultipleQuestion singleMultipleQuestion)
         {
             _questionsRepository.AddSingleMultipleAnswerQuestion(singleMultipleQuestion.singleMultipleAnswerQuestion, singleMultipleQuestion.singleMultipleAnswerQuestionOption);
@@ -39,20 +38,18 @@ namespace Promact.Trappist.Core.Controllers
             {
                 return BadRequest();
             }
-
             _questionsRepository.AddCodeSnippetQuestion(codeSnippetQuestionDto);
-
             return Ok(codeSnippetQuestionDto);
         }
-        #region GetAllQuestions
+
         /// <summary>
-        /// The undermentioned controller calls the GetAllQuestions method implemented in the QuestionRepository
+        /// Get All The Questions
         /// </summary>
         /// <returns>Questions List</returns>
         [HttpGet("question")]
         public async Task<IActionResult> GetAllQuestions()
         {
-            return Ok(await _questionsRepository.GetAllQuestions()); 
+            return Ok(await _questionsRepository.GetAllQuestionsAsync()); 
         }
         #endregion
     }

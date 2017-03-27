@@ -1,30 +1,24 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Promact.Trappist.Web.Models;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Promact.Trappist.Repository.Questions;
-using Promact.Trappist.DomainModel.DbContext;
-using Promact.Trappist.Repository.Categories;
-using Promact.Trappist.Repository.Tests;
-using Promact.Trappist.Utility.Constants;
-using Promact.Trappist.Repository.TestSettings;
-using Promact.Trappist.DomainModel.Seed;
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Promact.Trappist.DomainModel.DbContext;
+using Promact.Trappist.DomainModel.Seed;
 using Promact.Trappist.Repository.Account;
-using AutoMapper;
-using Promact.Trappist.DomainModel.ApplicationClasses.Question;
-using Promact.Trappist.DomainModel.Models.Question;
-using Promact.Trappist.DomainModel.ApplicationClasses.SingleMultipleAnswerQuestionApplicationClass;
-
-
+using Promact.Trappist.Repository.Categories;
+using Promact.Trappist.Repository.Questions;
+using Promact.Trappist.Repository.Tests;
+using Promact.Trappist.Repository.TestSettings;
+using Promact.Trappist.Utility.Constants;
+using Promact.Trappist.Web.Models;
+using System.IO;
 namespace Promact.Trappist.Web
 {
     public class Startup
@@ -52,17 +46,14 @@ namespace Promact.Trappist.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<TrappistDbContext>()
                 .AddDefaultTokenProviders();
-            services.AddMvc(/*config => { config.Filters.Add(typeof(GlobalExceptionFilter)); }*/);
+            services.AddMvc( ).AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddScoped<IQuestionRespository, QuestionRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITestsRepository, TestsRepository>();
             services.AddScoped<IStringConstants, StringConstants>();
             services.AddScoped<ITestSettingsRepository, TestSettingsRepository>();
-            services.AddScoped<IAccountRepository, AccountRepository>();
-          
-        
-    }
-
+            services.AddScoped<IAccountRepository, AccountRepository>();       
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, TrappistDbContext context)
         {
@@ -70,22 +61,16 @@ namespace Promact.Trappist.Web
             loggerFactory.AddDebug();
             loggerFactory.AddNLog();
             app.AddNLogWeb();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-
             app.UseStaticFiles();
-
-
             if (env.IsDevelopment())
             {
                 app.UseStaticFiles(new StaticFileOptions
@@ -94,7 +79,6 @@ namespace Promact.Trappist.Web
                     RequestPath = new PathString("/node_modules")
                 });
             }
-
             app.UseIdentity();
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
             app.UseMvc(routes =>
@@ -123,14 +107,6 @@ namespace Promact.Trappist.Web
             }
             context.Database.Migrate();
             context.Seed();
-            #region Auto Mapper Configuration
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<SingleMultipleAnswerQuestion, SingleMultipleAnswerQuestionAC>();
-                cfg.CreateMap<CodeSnippetQuestion, SingleMultipleAnswerQuestionAC>();
-                cfg.CreateMap<CodeSnippetQuestionDto, CodeSnippetQuestion>();
-            });
-            #endregion
         }
     }
 }
