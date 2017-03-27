@@ -28,7 +28,8 @@
             'angular2-wizard': 'npm:angular2-wizard/dist/',
              'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
             'clipboard': 'npm:clipboard/dist/clipboard.js',
-            'ngx-clipboard': 'npm:ngx-clipboard'
+            'ngx-clipboard': 'npm:ngx-clipboard',
+            "ng2-ckeditor": "npm:ng2-ckeditor/lib"
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -48,6 +49,10 @@
             },
             'clipboard': {
                 defaultExtension: 'js'
+            },
+            "ng2-ckeditor": {
+                "main": "index.js",
+                "defaultExtension": "js",
             },
             '.': { defaultExtension: 'js' }
         }

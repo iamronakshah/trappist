@@ -1,6 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import 'rxjs/Rx';
 
@@ -22,7 +23,8 @@ import { ProfileModule } from './profile/profile.module';
         CoreModule,
         QuestionsModule,
         TestsModule,
-        ProfileModule
+        ProfileModule,
+        CKEditorModule
     ],
     providers: [
 
