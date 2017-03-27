@@ -1,8 +1,9 @@
 ﻿using Promact.Trappist.DomainModel.DbContext;
-using Promact.Trappist.Repository.Tests;
-using Microsoft.Extensions.DependencyInjection;
-
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
+using Promact.Trappist.Repository.Tests;
+using System.Linq;
+using Promact.Trappist.DomainModel.Models.Test;
 
 namespace Promact.Trappist.Test.Tests
 {
@@ -28,7 +29,7 @@ namespace Promact.Trappist.Test.Tests
         [Fact]
         public void GetAllTest()
         {
-            AddTest();
+            AddTests();
             var list = _testRepository.GetAllTests();
             Assert.NotNull(list);
             Assert.Equal(3, list.Count);
@@ -42,12 +43,70 @@ namespace Promact.Trappist.Test.Tests
             var list = _testRepository.GetAllTests();
             Assert.Equal(0, list.Count);
         }
-        private void AddTest()
+        private void AddTests()
         {
             _trappistDbContext.Test.Add(new DomainModel.Models.Test.Test() { TestName = "BBIT 123" });
             _trappistDbContext.Test.Add(new DomainModel.Models.Test.Test() { TestName = "MCKV 123" });
             _trappistDbContext.Test.Add(new DomainModel.Models.Test.Test() { TestName = "CU 123" });
             _trappistDbContext.SaveChanges();
+        }
+        /// <summary>
+        /// Test Case for adding a new test
+        /// </summary>
+        [Fact]
+        private void AddTest()
+        {
+            var test = CreateTest();
+            _testRepository.CreateTest(test);
+            Assert.True(_trappistDbContext.Test.Count() == 1);
+        }
+        /// <summary>
+        /// Test  Case to create a new test when the test name given is unique
+        /// </summary>
+        [Fact]
+        public void UniqueNameTest()
+        {
+            var test = CreateTest();
+            _testRepository.CreateTest(test);
+            var newTest = CreateTest();
+            var name = "nameOfTest";
+            Response response = new Response();
+            _testRepository.IsTestNameUnique(name);
+            _testRepository.CreateTest(newTest);
+            Assert.True(_trappistDbContext.Test.Count() == 2);
+        }
+        /// <summary>
+        /// Test Case to check when test name is not unique, new test is not added .
+        /// </summary>
+        [Fact]
+        public void IsNotUniqueNameTest()
+        {
+            var test = CreateTest();
+            _testRepository.CreateTest(test);
+            var name = "Test name";
+            _testRepository.IsTestNameUnique(name);
+            var testObj = CreateTest();
+            _testRepository.CreateTest(testObj);
+            Assert.True(_trappistDbContext.Test.Count() == 1);
+        }
+        /// <summary>
+        /// Test Case for random link creation
+        /// </summary>
+        [Fact]
+        public void RandomLinkStringTest()
+        {
+            var test = CreateTest();
+            _testRepository.CreateTest(test);
+            _testRepository.RandomLinkString(test, 10);
+            Assert.True(_trappistDbContext.Test.Count() == 1);
+        }
+        private DomainModel.Models.Test.Test CreateTest()
+        {
+            var test = new DomainModel.Models.Test.Test
+            {
+                TestName = "test name",
+            };
+            return test;
         }
     }
 }
